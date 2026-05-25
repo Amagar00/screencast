@@ -1,0 +1,11 @@
+{
+  "name": "screencast-root",
+  "private": true,
+  "workspaces": ["desktop", "phone-app"],
+  "scripts": {
+    "dev:desktop": "cd desktop && npm run dev",
+    "dev:phone": "cd phone-app && npm run dev",
+    "build:phone": "cd phone-app && npm run build",
+    "build:desktop": "cd desktop && npm run build"
+  }
+}
