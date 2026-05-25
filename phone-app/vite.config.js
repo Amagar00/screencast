@@ -25,3 +25,4 @@ export default defineConfig({
   base: '/screencast/', // GitHub Pages repo name — update to match your repo
   build: { outDir: 'dist' },
 });
+// deploy
