@@ -6,7 +6,7 @@ const QRCode = require('qrcode');
 
 const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
 const WS_PORT = 8765;
-const PHONE_APP_URL = 'https://YOUR_GITHUB_USERNAME.github.io/screencast'; // Update after deploy
+const PHONE_APP_URL = 'https://Amagar00.github.io/screencast'; // Update after deploy
 
 let mainWindow;
 let wss;
