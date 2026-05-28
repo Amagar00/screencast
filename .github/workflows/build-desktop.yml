@@ -1,4 +1,4 @@
- name: Build Desktop App
+name: Build Desktop App
 
 on:
   push:
@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ScreenCast-Windows
-          path: desktop/release/*.exe
+          path: desktop/release/*.exe 
