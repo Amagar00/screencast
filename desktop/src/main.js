@@ -4,16 +4,15 @@ const os = require('os');
 const { WebSocketServer } = require('ws');
 const QRCode = require('qrcode');
 
-const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+const isDev = !app.isPackaged;
 const WS_PORT = 8765;
-const PHONE_APP_URL = 'https://Amagar00.github.io/screencast'; // Update after deploy
+const PHONE_APP_URL = 'https://Amagar00.github.io/screencast';
 
 let mainWindow;
 let wss;
 let desktopClient = null;
 let phoneClient = null;
 
-// ── Get local IP ────────────────────────────────────────────────────────────
 function getLocalIP() {
   const interfaces = os.networkInterfaces();
   for (const name of Object.keys(interfaces)) {
@@ -26,7 +25,6 @@ function getLocalIP() {
   return '127.0.0.1';
 }
 
-// ── Start WebSocket signaling server ────────────────────────────────────────
 function startSignalingServer() {
   wss = new WebSocketServer({ port: WS_PORT });
 
@@ -73,7 +71,6 @@ function startSignalingServer() {
           }
           break;
 
-        // WebRTC signaling relay
         case 'offer':
         case 'answer':
         case 'ice-candidate':
@@ -107,7 +104,6 @@ function startSignalingServer() {
   });
 }
 
-// ── Create main window ───────────────────────────────────────────────────────
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
@@ -132,7 +128,7 @@ function createWindow() {
     mainWindow.loadURL('http://localhost:5173');
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+    mainWindow.loadFile(path.join(__dirname, '..', 'dist', 'index.html'));
   }
 
   mainWindow.on('closed', () => { mainWindow = null; });
@@ -142,10 +138,7 @@ app.whenReady().then(() => {
   createWindow();
   startSignalingServer();
 
-  // Register desktop as signaling peer from renderer request
-  ipcMain.on('renderer-ready', () => {
-    // renderer will self-register via WebSocket
-  });
+  ipcMain.on('renderer-ready', () => {});
 });
 
 app.on('window-all-closed', () => {
